@@ -1,3 +1,4 @@
+# .github/workflows/pr-kicad-diff.yaml
 name: KiCad Pull Request Diff
 
 concurrency:
@@ -14,10 +15,10 @@ jobs:
   kiri-diff:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.sha }}
     - name: Kiri
-      uses: usa-reddragon/kiri-github-action@v2
+      uses: usa-reddragon/kiri-github-action@v1
       with:
         project-file: kicad/productname.kicad_pro
