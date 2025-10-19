@@ -1,3 +1,4 @@
+# .github/workflows/pr-kicad-diff-delete.yaml
 name: KiCad Diff Delete
 
 concurrency:
@@ -14,4 +15,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Kiri
-      uses: usa-reddragon/kiri-github-action@v2
+      uses: usa-reddragon/kiri-github-action@v1
