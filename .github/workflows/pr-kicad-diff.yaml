@@ -8,17 +8,29 @@ concurrency:
 on:
   pull_request:
     types:
-    - opened
-    - synchronize
+      - opened
+      - synchronize
 
 jobs:
   kiri-diff:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-      with:
-        ref: ${{ github.event.pull_request.head.sha }}
-    - name: Kiri
-      uses: usa-reddragon/kiri-github-action@v2
-      with:
-        project-file: kicad/productname.kicad_pro
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Kiri
+        uses: usa-reddragon/kiri-github-action@v2
+        with:
+          # <-- Upewnij się, że ta ścieżka jest dokładnie taka, jak w repozytorium
+          project-file: kicad/MyProject.kicad_pro
+          # <-- jawnie ustaw folder dla artefaktów
+          output-dir: kiri-output
+          archive: true
+          remove: false
+
+      - name: Upload Kiri artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: kiri-diff-artifacts
+          path: kiri-output
